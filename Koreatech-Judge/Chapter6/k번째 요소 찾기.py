@@ -1,50 +1,27 @@
 import sys
+import random
 
-def solution(nums_count,index,size):
-    if size == 1: return 0
-    if size == 2:
-        if nums_count[index[0]] > nums_count[index[1]]: return 0
-        else: return 1
+def solution(nums,start,end,target):
+    random_pivot = random.randrange(start,end)
+    nums[random_pivot], nums[start] = nums[start], nums[random_pivot]
     
-    if size%2==0:
-        if nums_count[index[0]] > nums_count[index[1]]: max_index = 0
-        else: max_index = 1
-        i = 2
-        while i<size:
-            if nums_count[index[i]]<nums_count[index[i+1]]:
-                if nums_count[index[max_index]]<nums_count[index[i+1]]: max_index = i+1
-            else:
-                if nums_count[index[max_index]]<nums_count[index[i]]: max_index = i
-            i+=2
-        return max_index
-    else:
-        max_index = 0
-        i = 1
-        while i<size:
-            if nums_count[index[i]]<nums_count[index[i+1]]:
-                if nums_count[index[max_index]]<nums_count[index[i+1]]: max_index = i+1
-            else:
-                if nums_count[index[max_index]]<nums_count[index[i]]: max_index = i
-            i+=2
-        return max_index
+    pivot = start
+    left = pivot + 1
+    for i in range(left,end):
+        if nums[pivot]>nums[i]:
+            nums[left], nums[i] = nums[i], nums[left]
+            left+=1
+    nums[pivot], nums[left-1] = nums[left-1], nums[pivot]
+    if left == target: return nums[left-1]
+    elif left>target: return solution(nums,start,left-1,target)
+    elif left<target: return solution(nums,left,end,target)
 
 T = int(sys.stdin.readline())
 for _ in range(T):
     N, K = map(int,sys.stdin.readline().split())
     nums = list(map(int,sys.stdin.readline().split()))
-    nums_count = dict()
-    index = dict()
-    i= 0
-    for n in nums:
-        if n in nums_count.keys(): nums_count[n] += 1
-        else:
-            nums_count[n] = 1
-            index[i] = n
-            i += 1
-    for _ in range(K):
-        temp = solution(nums_count,index,i)
-        print(index[temp],end=" ")
-        nums_count.pop(index[temp])
-        index[temp] = index[i-1]
-        i-=1
-    print()
+    print(solution(nums,0,N,K))
+    
+'''
+    random pivot 퀵정렬을 활용해서 해결한다.
+'''
