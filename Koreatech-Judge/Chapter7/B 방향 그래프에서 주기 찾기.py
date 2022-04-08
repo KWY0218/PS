@@ -26,3 +26,7 @@ for _ in range(T):
                 stack.extend(site[start])
         if answer: break
     print("true") if answer else print("false")
+    
+'''
+    방향 그래프이기 때문에 0->2->3->2 는 안되지만, 2->3->2는 되기 때문에 매번 visited를 초기화한다.
+'''
