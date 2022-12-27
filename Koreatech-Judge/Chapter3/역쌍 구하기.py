@@ -7,20 +7,17 @@ import sys
 def merge_sort(start,end):
     if (end-start) < 2: return 0
     mid = (start+end)//2
-    left_count = merge_sort(start,mid)
-    right_count = merge_sort(mid,end)
-    split_count = merge(start,mid,end)
-    return left_count + right_count + split_count
+    merge_sort(start,mid)
+    merge_sort(mid,end)
+    merge(start,mid,end)
 
 def merge(start,mid,end):
-    count = 0
     left_index = start
     right_index = mid
     sort_list = []
     while left_index<mid and right_index<end:
         if K[left_index]>K[right_index]:
             sort_list.append(K[right_index])
-            count += (mid - left_index)
             right_index += 1
         else:
             sort_list.append(K[left_index])
@@ -36,10 +33,10 @@ def merge(start,mid,end):
     
     for i in range(start,end):
         K[i] = sort_list[i-start]
-    return count
 
 T = int(sys.stdin.readline())
 for _ in range(T):  
     N = int(sys.stdin.readline())
     K = list(map(int,sys.stdin.readline().split()))
-    print(merge_sort(0,len(K)))
+    merge_sort(0,len(K))
+    print(K)
