@@ -1,5 +1,5 @@
-package array
-// Runtime 261ns
+package list
+// LeetCode 01 Runtime 261ns
 fun twoSum(nums: IntArray, target: Int): IntArray {
     var fInx = -1
     var sInx = -1

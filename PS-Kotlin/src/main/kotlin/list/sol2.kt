@@ -1,5 +1,6 @@
-package array
+package list
 
+// LeetCode 561
 fun arrayPairSum(nums: IntArray): Int {
     nums.sort()
     var sum = 0
