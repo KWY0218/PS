@@ -1,23 +1,21 @@
 import linked_list.ListNode
 import linked_list.mergeTwoLists
+import linked_list.reverseList
 import stack.removeDuplicateLetters
 
 fun main() {
-    val l11 = ListNode(1)
-    val l12 = ListNode(2)
-    val l13 = ListNode(4)
+    val l1 = ListNode(1)
+    val l2 = ListNode(2)
+    val l3 = ListNode(3)
+    val l4 = ListNode(4)
+    val l5 = ListNode(5)
 
-    val l21 = ListNode(1)
-    val l22 = ListNode(3)
-    val l23 = ListNode(4)
+    l1.next = l2
+    l2.next = l3
+    l3.next = l4
+    l4.next = l5
 
-    l11.next = l12
-    l12.next = l13
-
-    l21.next = l22
-    l22.next = l23
-
-    var l = mergeTwoLists(l11, l21)
+    var l = reverseList(l1)
     while(l != null) {
         println(l.`val`)
         l = l.next
