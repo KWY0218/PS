@@ -2,9 +2,9 @@ package tree
 
 import java.util.*
 
-lateinit var visited: Array<Boolean>
-lateinit var answer: Array<Int>
-lateinit var graph: Array<Stack<Int>>
+private lateinit var visited: Array<Boolean>
+private lateinit var answer: Array<Int>
+private lateinit var graph: Array<Stack<Int>>
 
 fun main() = with(Scanner(System.`in`)) {
     val n = readln().toInt()
