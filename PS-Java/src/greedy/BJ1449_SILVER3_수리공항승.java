@@ -32,4 +32,30 @@ public class BJ1449_SILVER3_수리공항승 {
             System.out.println(count);
         }
     }
+
+    public static void main2(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int l = Integer.parseInt(st.nextToken());
+
+        int[] nums = new int[n];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            nums[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(nums);
+
+        boolean[] tape = new boolean[1001];
+        int answer = 0;
+        for (int num : nums) {
+            if (tape[num]) continue;
+            for (int i = num; i < num + l; i++) {
+                if (i > 1000) break;
+                tape[i] = true;
+            }
+            answer++;
+        }
+        System.out.println(answer);
+    }
 }
